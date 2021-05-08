@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1084905094491",
+    "project_id": "seprojectteam2",
+    "storage_bucket": "seprojectteam2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084905094491:android:79153b80c5839f65f36e7e",
+        "android_client_info": {
+          "package_name": "gachon.seteam2.airlinereservation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084905094491-k05e8a7g8ajjq4oapcfu6buhjh2fsomq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gachon.seteam2.airlinereservation",
+            "certificate_hash": "6d655e3d7af6b893eee88cc0472c6c0cad4a69bc"
+          }
+        },
+        {
+          "client_id": "1084905094491-mnh0bdgcnb86f70jo0mhngimcfc3ustc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSf4q2Gcp0oplhKYysadpeLTYwfQHASzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084905094491-mnh0bdgcnb86f70jo0mhngimcfc3ustc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
