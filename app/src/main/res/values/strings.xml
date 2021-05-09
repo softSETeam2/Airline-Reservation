@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Airline Reservation</string>
+    <string name="myAppName">항공 예약 시스템</string>
 </resources>

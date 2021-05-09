@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordText = findViewById(R.id.login_password);
         mAutoCheck = findViewById(R.id.auto_check);
 
-        // 아이디 자동 입력을 위한 변수
+        // 아이디 자동 입력 처리
         SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
         Boolean check_bool = pref.getBoolean("checkbox",false);
         if (check_bool) {
