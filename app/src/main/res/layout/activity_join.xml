@@ -22,12 +22,12 @@
     <EditText
         android:id="@+id/join_name"
         app:layout_constraintBottom_toTopOf="@+id/join_email"
-        app:layout_constraintEnd_toEndOf="@+id/check_button"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
         android:layout_marginBottom="24dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginRight="97dp"
         android:ems="10"
         android:hint="이름"
         android:inputType="textPersonName" />
@@ -57,7 +57,6 @@
     <EditText
         android:id="@+id/join_email"
         app:layout_constraintBottom_toTopOf="@+id/join_password"
-        app:layout_constraintEnd_toStartOf="@+id/check_button"
         app:layout_constraintStart_toStartOf="@+id/join_name"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -68,16 +67,6 @@
         android:inputType="textEmailAddress"
         android:hint="이메일"/>
 
-    <Button
-        android:id="@+id/check_button"
-        app:layout_constraintBaseline_toBaselineOf="@+id/join_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/colorPrimary"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="97dp"
-        android:layout_marginRight="97dp"
-        android:text="확인" />
 
     <Button
         android:id="@+id/delete"

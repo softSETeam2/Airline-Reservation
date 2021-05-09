@@ -26,6 +26,16 @@
         android:text="로그인"
         app:layout_constraintBaseline_toBaselineOf="@+id/join_button"
         app:layout_constraintStart_toStartOf="@+id/login_password" />
+    <CheckBox
+        android:id="@+id/auto_check"
+        android:textSize="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="아이디 저장"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@id/login_email"
+        app:layout_constraintTop_toBottomOf="@id/login_email"
+        />
 
     <EditText
         android:id="@+id/login_email"
@@ -58,7 +68,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="190dp"
+        android:layout_marginBottom="230dp"
         android:text="가입"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/login_password" />

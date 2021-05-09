@@ -2,7 +2,7 @@ package gachon.seteam2.airlinereservation;
 
 public class User {
 
-    public String userName;
+    public String name;
     public String email;
     public String uid;
 
@@ -10,18 +10,18 @@ public class User {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String userName, String email,String uid) {
-        this.userName = userName;
+    public User(String name, String email, String uid) {
+        this.name = name;
         this.email = email;
         this.uid = uid;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -43,7 +43,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
+                "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", uid='" + uid + '\'' +
                 '}';

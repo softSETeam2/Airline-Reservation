@@ -96,11 +96,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 //해쉬맵 테이블을 파이어베이스 데이터베이스에 저장
                                 HashMap<Object,String> hashMap = new HashMap<>();
-
+                                //해쉬맵에 저장
                                 hashMap.put("uid",uid);
                                 hashMap.put("email",email);
                                 hashMap.put("name",name);
-
+                                //실시간 데이터베이스에 저장
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference reference = database.getReference("Users");
                                 reference.child(uid).setValue(hashMap);
