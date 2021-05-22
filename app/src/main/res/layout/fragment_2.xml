@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/start"
+        android:layout_marginLeft="100dp"
+        android:text="출발지"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Destination"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="100dp"
+        android:text="도착지"/>
+
+    <Spinner
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner1"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@id/start"/>
+
+    <Spinner
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2"
+        android:layout_marginRight="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/Destination"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Departure_day"
+        android:layout_below="@+id/spinner1"
+        android:layout_marginLeft="50dp"
+        android:text="출발날짜"
+        android:layout_centerInParent="true"/>
+
+
+</RelativeLayout>
