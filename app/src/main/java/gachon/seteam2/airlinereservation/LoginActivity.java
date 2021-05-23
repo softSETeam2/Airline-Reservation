@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+
         // 파이어베이스 로그인 인스턴스
         firebaseAuth =  FirebaseAuth.getInstance();
 
@@ -54,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         mEmailText = findViewById(R.id.login_email);
         mPasswordText = findViewById(R.id.login_password);
         mAutoCheck = findViewById(R.id.auto_check);
+
 
         // 아이디 자동 입력 처리
         SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
