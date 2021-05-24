@@ -40,14 +40,14 @@ public class Fragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        list=getArguments().getStringArrayList("list");
+        String[] list1={"울산","사천","군산","김해","원주","김포","광주","대구","포항","무안","양양","청주","여수","제주","인천"};
         // Inflate the layout for this fragment
         ViewGroup rootView= (ViewGroup)inflater.inflate(R.layout.fragment_2, container, false);
 
         Spinner spinner1 = rootView.findViewById(R.id.spinner1);
         Spinner spinner2 = rootView.findViewById(R.id.spinner2);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                getActivity(), android.R.layout.simple_spinner_item,list);
+                getActivity(), android.R.layout.simple_spinner_item,list1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
         spinner2.setAdapter(adapter);
@@ -55,8 +55,8 @@ public class Fragment2 extends Fragment {
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), list.get(position) +"(이)가 선택되었습니다", Toast.LENGTH_SHORT).show();
-                start=list.get(position);
+                Toast.makeText(getActivity(), list1[position] +"(이)가 선택되었습니다", Toast.LENGTH_SHORT).show();
+                start=list1[position];
             }
 
             @Override
@@ -67,8 +67,8 @@ public class Fragment2 extends Fragment {
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),list.get(position)+"(이)가 선택되었습니다", Toast.LENGTH_SHORT).show();
-                destination=list.get(position);
+                Toast.makeText(getActivity(),list1[position]+"(이)가 선택되었습니다", Toast.LENGTH_SHORT).show();
+                destination=list1[position];
             }
 
             @Override
