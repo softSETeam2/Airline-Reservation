@@ -77,7 +77,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
         android:layout_marginLeft="96dp"
-
         android:text="취소" />
 
     <Button
