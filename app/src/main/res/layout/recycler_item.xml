@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="4dp"
+    >
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:background="@color/colorPrimary"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="airline: "
+                android:textSize="14sp"
+                android:background="@color/colorPrimary" />
+            <TextView
+                android:id="@+id/postTitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="airline"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:background="@color/colorPrimary"
+                />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="출발지: "
+                    android:textSize="14sp"
+                    android:background="@color/colorPrimary" />
+            <TextView
+                android:id="@+id/sourceview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="source"
+                android:textSize="24sp"
+                android:background="@color/colorPrimary"
+                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="->"
+                    android:textSize="24sp"
+                    android:layout_marginLeft="50dp"
+                    android:background="@color/colorPrimary"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="도착지: "
+                    android:layout_marginLeft="40dp"
+                    android:textSize="14sp"
+                    android:background="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/destinationview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="source"
+
+                    android:textSize="24sp"
+                    android:background="@color/colorPrimary"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary">
+                <TextView
+                    android:id="@+id/dateTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DATE"
+                    android:layout_marginHorizontal="20dp"
+                    android:textColor="#FF0000FF"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
