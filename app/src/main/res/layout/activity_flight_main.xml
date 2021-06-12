@@ -39,4 +39,11 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_white_border2" />
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:text="로그아웃" />
+
 </LinearLayout>

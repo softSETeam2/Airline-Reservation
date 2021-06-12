@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class FlightActivity extends AppCompatActivity {
@@ -30,12 +33,14 @@ public class FlightActivity extends AppCompatActivity {
     private EditText date, first, business, economy;
     private Button dateButton;
     private String dateMessage;
+    String today;
     String[] SourceAirportData = {"무안   |   0", "광주   |   1", "군산   |   2", "여수   |   3", "원주   |   4", "양양   |   5", "제주   |   6", "김해   |   7", "사천   |   8", "울산   |   9", "인천   |   10", "김포   |   11", "포항   |   12", "대구   |   13", "청주   |   14" };
     String[] DestinationAirportData = {"무안   |   0", "광주   |   1", "군산   |   2", "여수   |   3", "원주   |   4", "양양   |   5", "제주   |   6", "김해   |   7", "사천   |   8", "울산   |   9", "인천   |   10", "김포   |   11", "포항   |   12", "대구   |   13", "청주   |   14" };
     String[] Hour = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"};
     String[] Minute = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
     Button setting_save_button;
     private long count;
+    private int flag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,11 @@ public class FlightActivity extends AppCompatActivity {
         });
 
         date = (EditText)findViewById(R.id.date);
+
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy.MM.dd");
+        Date time = new Date();
+        today = format1.format(time);
+        Log.d("MainActivity", today);
 
         dateButton = (Button)findViewById(R.id.dateButton);
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +124,6 @@ public class FlightActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String sourceAirport = sourceAirportSpinner.getSelectedItem().toString();
-                int sourceAirportID = sourceAirportSpinner.getSelectedItemPosition();
                 String destinationAirport = destinationAirportSpinner.getSelectedItem().toString();
                 String departureTime = departureTimeSpinner.getSelectedItem().toString();
                 String departureTime2 = departureTimeSpinner2.getSelectedItem().toString();
@@ -132,31 +141,67 @@ public class FlightActivity extends AppCompatActivity {
                 hashMap.put("Departure Time", departureTime + departureTime2);
                 hashMap.put("Economy", economyNum);
                 hashMap.put("First", firstNum);
-                String[] flight = name.split("   ");
-                hashMap.put("airline", flight[0]);
-                hashMap.put("airline ID", flight[2]);
+
+                flag = 0;
+
+                if (airline.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "다시 시도해 주세요", Toast.LENGTH_LONG).show();
+                    flag++;
+                } else {
+                    String[] flight = name.split("   ");
+                    hashMap.put("airline", flight[0]);
+                    hashMap.put("airline ID", flight[2]);
+                }
+
                 hashMap.put("destination apirport", destinationAirport.substring(0, 3));
                 hashMap.put("destination airport id", destinationAirport.substring(9));
                 hashMap.put("source airport", sourceAirport.substring(0, 3));
                 hashMap.put("source airport id", sourceAirport.substring(9));
 
-                //실시간 데이터베이스에 저장
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference reference = database.getReference("Flight");
-                FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        count = dataSnapshot.child("Flight").getChildrenCount();
-                        count++;
-                        reference.child(Long.toString(count)).setValue(hashMap);
-                    }
+                if (!isInteger(firstNum) || !isInteger(businessNum) || !isInteger(economyNum)) {
+                    Toast.makeText(getApplicationContext(), "정확한 좌석 정보를 입력해주세요", Toast.LENGTH_LONG).show();
+                    flag++;
+                }
+                if (firstNum.equals("") || businessNum.equals("") || economyNum.equals("")) {
+                    Toast.makeText(getApplicationContext(), "정확한 좌석 정보를 입력해주세요", Toast.LENGTH_LONG).show();
+                    flag++;
+                }
+                if ((arrivalTime + arrivalTime2).equals(departureTime + departureTime2)) {
+                    Toast.makeText(getApplicationContext(), "출발시간과 도착시간이 같을 수 없습니다", Toast.LENGTH_LONG).show();
+                    flag++;
+                }
+                if (sourceAirport.equals(destinationAirport)) {
+                    Toast.makeText(getApplicationContext(), "출발지와 도착지가 같을 수 없습니다.", Toast.LENGTH_LONG).show();
+                    flag++;
+                }
+                if (date.getText().toString().equals(today)) {
+                    Toast.makeText(getApplicationContext(), "내일 날짜부터 입력이 가능합니다", Toast.LENGTH_LONG).show();
+                    flag++;
+                }
+                if (date.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "날짜를 입력해주세요", Toast.LENGTH_LONG).show();
+                    flag++;
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) { }
-                });
+                if (flag == 0) {
+                    //실시간 데이터베이스에 저장
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference reference = database.getReference("Flight");
+                    FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            count = dataSnapshot.child("Flight").getChildrenCount();
+                            count++;
+                            reference.child(Long.toString(count)).setValue(hashMap);
+                        }
 
-                startActivity(new Intent(FlightActivity.this, FlightMainActivity.class));
-                finish();
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) { }
+                    });
+
+                    startActivity(new Intent(FlightActivity.this, FlightMainActivity.class));
+                    finish();
+                }
             }
         });
     }
@@ -189,5 +234,14 @@ public class FlightActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.none, R.anim.slide_exit);
+    }
+
+    static boolean isInteger(String s) { //정수 판별 함수
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch(NumberFormatException e) {  //문자열이 나타내는 숫자와 일치하지 않는 타입의 숫자로 변환 시 발생
+            return false;
+        }
     }
 }

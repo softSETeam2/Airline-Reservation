@@ -26,6 +26,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+
 public class LoginActivity extends AppCompatActivity {
     Button mLoginBtn, mResigetBtn;
     EditText mEmailText, mPasswordText;
@@ -97,6 +101,56 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) { // 로그인 성공
+                                if (mLoginFlight.isChecked()) {
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    uid = user.getUid();
+
+                                    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                                    rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@androidx.annotation.NonNull @NotNull DataSnapshot snapshot) {
+                                            Log.d("MainActivity", uid);
+                                            if (snapshot.child("FlightUsers").hasChild(uid)) {
+                                                startActivity(new Intent(getApplicationContext(), FlightMainActivity.class));
+                                                finish();
+                                            } else {
+                                                Log.d("MainActivity", "fail");
+                                                Toast.makeText(getApplicationContext(), "항공사 계정이 아니거나, 등록된 계정이 없습니다.", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@androidx.annotation.NonNull @NotNull DatabaseError error) {
+
+                                        }
+                                    });
+
+                                } else {
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    uid = user.getUid();
+
+                                    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                                    rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@androidx.annotation.NonNull @NotNull DataSnapshot snapshot) {
+                                            Log.d("MainActivity", uid);
+                                            if (snapshot.child("Users").hasChild(uid)) {
+                                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Log.d("MainActivity", "fail");
+                                                Toast.makeText(getApplicationContext(), "고객 계정이 아니거나, 등록된 계정이 없습니다.", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@androidx.annotation.NonNull @NotNull DatabaseError error) {
+
+                                        }
+                                    });
+                                }
+
                                 // 자동로그인 체크상태일 경우
                                 SharedPreferences.Editor editor = pref.edit();
                                 if (mAutoCheck.isChecked()) {
@@ -110,22 +164,6 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 editor.commit();
 
-
-
-                                //////////////////////////////////////////////////////////////
-                                // data = data.getInstance();
-                                // data.getReference().child("User")
-
-
-                                ///////////////////////////////////////////////////////////////
-
-                                if (mLoginFlight.isChecked()) {
-                                    startActivity(new Intent(getApplicationContext(), FlightMainActivity.class));
-                                    finish();
-                                } else {
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
-                                }
 
                             } else {
                                 Toast.makeText(LoginActivity.this, "로그인 오류", Toast.LENGTH_SHORT).show();
