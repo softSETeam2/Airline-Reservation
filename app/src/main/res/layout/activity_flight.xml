@@ -24,11 +24,16 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="16dp" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/airline"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="15dp"/>
+                android:layout_marginBottom="15dp"
+                android:text=""
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000" />
 
             <TextView
                 android:layout_width="360dp"
@@ -189,16 +194,6 @@
                     android:layout_weight="1"
                     android:layout_gravity="left"
                     android:layout_marginLeft="3.8dp"
-                    android:text="Seat 가격 (원)"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="3.8dp"
                     android:text="Seat 개수"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16dp" />
@@ -209,14 +204,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/colorPrimary" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -247,7 +234,8 @@
 
                 <TableRow>
 
-                    <CheckBox
+                    <TextView
+                        android:textColor="@color/black"
                         android:id="@+id/signup04_SU"
                         android:layout_width="0dp"
                         android:layout_weight="1"
@@ -257,13 +245,7 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="40dp"
-                        android:hint="First Class 가격"
-                        android:textSize="15dp"/>
-
-                    <EditText
+                        android:id="@+id/first"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="40dp"
@@ -274,23 +256,18 @@
 
                 <TableRow>
 
-                    <CheckBox
+                    <TextView
+                        android:textColor="@color/black"
                         android:id="@+id/signup04_IC"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="40dp"
                         android:layout_marginBottom="2dp"
                         android:text="Business"
-                        android:textSize="15sp"></CheckBox>
+                        android:textSize="15sp" />
 
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="40dp"
-                        android:hint="Business 가격"
-                        android:textSize="15dp"/>
-
-                    <EditText
+                        android:id="@+id/business"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="40dp"
@@ -300,23 +277,18 @@
 
                 <TableRow>
 
-                    <CheckBox
+                    <TextView
+                        android:textColor="@color/black"
                         android:id="@+id/signup04_SJ"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="40dp"
                         android:layout_marginBottom="2dp"
                         android:text="Economy"
-                        android:textSize="15sp"></CheckBox>
+                        android:textSize="15sp" />
 
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="40dp"
-                        android:hint="Economy 가격"
-                        android:textSize="15dp"/>
-
-                    <EditText
+                        android:id="@+id/economy"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="40dp"
@@ -339,7 +311,8 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="30dp"
                 android:gravity="center"
                 android:text="데이터 저장"
                 android:backgroundTint="@color/colorPrimary"

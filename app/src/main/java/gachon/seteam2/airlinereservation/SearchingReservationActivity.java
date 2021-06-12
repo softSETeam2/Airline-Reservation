@@ -1,18 +1,30 @@
 package gachon.seteam2.airlinereservation;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SearchingReservationActivity extends AppCompatActivity {
 
+    private TextView airline;
     private EditText date;
     private Button dateButton;
     String[] SourceAirportData = {"무안   |   0", "광주   |   1", "군산   |   2", "여수   |   3", "원주   |   4", "양양   |   5", "제주   |   6", "김해   |   7", "사천   |   8", "울산   |   9", "인천   |   10", "김포   |   11", "포항   |   12", "대구   |   13", "청주   |   14" };
@@ -20,10 +32,32 @@ public class SearchingReservationActivity extends AppCompatActivity {
     String[] Hour = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"};
     String[] Minute = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searching_reservation);
+
+        //액션 바 등록하기
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("예약 데이터 검색");
+
+        actionBar.setDisplayHomeAsUpEnabled(true); //뒤로가기버튼
+        actionBar.setDisplayShowHomeEnabled(true); //홈 아이콘
+
+        airline = findViewById(R.id.airline);
+        FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.child("FlightUsers").getChildren()) {
+                    String name = snapshot.child("name").getValue().toString();
+                    airline.setText(name);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
 
         date = (EditText)findViewById(R.id.date);
 
@@ -77,5 +111,16 @@ public class SearchingReservationActivity extends AppCompatActivity {
         String year_string = Integer.toString(year);
         String dateMessage = (year_string + "." + month_string + "." + day_string);
         date.setText(dateMessage);
+    }
+
+    public boolean onSupportNavigateUp(){
+        onBackPressed();; // 뒤로가기 버튼이 눌렸을시
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
+        return super.onSupportNavigateUp(); // 뒤로가기 버튼
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
     }
 }

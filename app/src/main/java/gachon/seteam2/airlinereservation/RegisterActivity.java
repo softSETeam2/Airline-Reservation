@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.*;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,16 +24,19 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import lombok.NonNull;
+
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
     private FirebaseAuth firebaseAuth;
     Button mCancleBtn,mRegisterBtn;
     EditText mEmailText, mPasswordText, mPasswordcheckText, mName;
 
+    @NonNull
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_join);
+        setContentView(R.layout.activity_register);
 
         //액션 바 등록하기
         ActionBar actionBar = getSupportActionBar();
@@ -63,16 +66,13 @@ public class RegisterActivity extends AppCompatActivity {
         //파이어베이스 user 로 접글
 
         //가입버튼 클릭리스너   -->  firebase에 데이터를 저장한다.
-        mRegisterBtn.setOnClickListener(new View.OnClickListener(){
-
+        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //가입 정보 가져오기
                 final String email = mEmailText.getText().toString().trim();
                 String pwd = mPasswordText.getText().toString().trim();
                 String pwdcheck = mPasswordcheckText.getText().toString().trim();
-
 
                 if(pwd.equals(pwdcheck)) {
                     Log.d(TAG, "등록 버튼 " + email + " , " + pwd);
@@ -105,32 +105,25 @@ public class RegisterActivity extends AppCompatActivity {
                                 DatabaseReference reference = database.getReference("Users");
                                 reference.child(uid).setValue(hashMap);
 
-
                                 //가입이 이루어져을시 가입 화면을 빠져나감.
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-
                             } else {
                                 mDialog.dismiss();
                                 Toast.makeText(RegisterActivity.this, "이미 존재하는 아이디 입니다.", Toast.LENGTH_SHORT).show();
                                 return;  //해당 메소드 진행을 멈추고 빠져나감.
-
                             }
-
                         }
                     });
-
                     //비밀번호 오류시
                 }else{
-
-                    Toast.makeText(RegisterActivity.this, "비밀번호가 틀렸습니다. 다시 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "비밀번호가 틀렸습니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
         });
-
     }
 
     public boolean onSupportNavigateUp(){
@@ -138,6 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.none, R.anim.slide_exit);
         return super.onSupportNavigateUp(); // 뒤로가기 버튼
     }
+
     public void onBackPressed() {
         super.onBackPressed();
             overridePendingTransition(R.anim.none, R.anim.slide_exit);

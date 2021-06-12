@@ -1,8 +1,10 @@
 package gachon.seteam2.airlinereservation;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,27 +12,56 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class FlightActivity extends AppCompatActivity {
 
-    private EditText date;
+    String name;
+    private TextView airline;
+    private EditText date, first, business, economy;
     private Button dateButton;
-    String[] airlineData = {"아시아나항공   |   0", "에어부산   |   1", "에어서울   |   2", "이스타항공   |   3", "플라이강원   |   4", "하이에어   |   5", "제주공항   |   6", "진에어   |   7", "대한항공   |   8", "티웨이항공   |   9"};
+    private String dateMessage;
     String[] SourceAirportData = {"무안   |   0", "광주   |   1", "군산   |   2", "여수   |   3", "원주   |   4", "양양   |   5", "제주   |   6", "김해   |   7", "사천   |   8", "울산   |   9", "인천   |   10", "김포   |   11", "포항   |   12", "대구   |   13", "청주   |   14" };
     String[] DestinationAirportData = {"무안   |   0", "광주   |   1", "군산   |   2", "여수   |   3", "원주   |   4", "양양   |   5", "제주   |   6", "김해   |   7", "사천   |   8", "울산   |   9", "인천   |   10", "김포   |   11", "포항   |   12", "대구   |   13", "청주   |   14" };
     String[] Hour = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"};
     String[] Minute = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
+    Button setting_save_button;
+    private long count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight);
 
-        Spinner airlineSpinner = (Spinner) findViewById(R.id.airline);
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, airlineData);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        airlineSpinner.setAdapter(adapter1);
+        //액션 바 등록하기
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("항공 데이터 입력");
+
+        actionBar.setDisplayHomeAsUpEnabled(true); //뒤로가기버튼
+        actionBar.setDisplayShowHomeEnabled(true); //홈 아이콘
+
+        airline = findViewById(R.id.airline);
+        FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.child("FlightUsers").getChildren()) {
+                    name = snapshot.child("name").getValue().toString();
+                    airline.setText(name);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
 
         date = (EditText)findViewById(R.id.date);
 
@@ -71,6 +102,63 @@ public class FlightActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter7 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Minute);
         adapter7.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         arrivalTimeSpinner2.setAdapter(adapter7);
+
+        first = findViewById(R.id.first);
+
+        business = findViewById(R.id.business);
+
+        economy = findViewById(R.id.economy);
+
+        setting_save_button = findViewById(R.id.setting_save_button);
+        setting_save_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String sourceAirport = sourceAirportSpinner.getSelectedItem().toString();
+                int sourceAirportID = sourceAirportSpinner.getSelectedItemPosition();
+                String destinationAirport = destinationAirportSpinner.getSelectedItem().toString();
+                String departureTime = departureTimeSpinner.getSelectedItem().toString();
+                String departureTime2 = departureTimeSpinner2.getSelectedItem().toString();
+                String arrivalTime = arrivalTimeSpinner.getSelectedItem().toString();
+                String arrivalTime2 = arrivalTimeSpinner2.getSelectedItem().toString();
+                String firstNum = first.getText().toString();
+                String businessNum = business.getText().toString();
+                String economyNum = economy.getText().toString();
+
+                //해쉬맵 테이블을 파이어베이스 데이터베이스에 저장
+                HashMap<Object,String> hashMap = new HashMap<>();
+                hashMap.put("Arrival Time", arrivalTime + arrivalTime2);
+                hashMap.put("Business", businessNum);
+                hashMap.put("Date", dateMessage);
+                hashMap.put("Departure Time", departureTime + departureTime2);
+                hashMap.put("Economy", economyNum);
+                hashMap.put("First", firstNum);
+                String[] flight = name.split("   ");
+                hashMap.put("airline", flight[0]);
+                hashMap.put("airline ID", flight[2]);
+                hashMap.put("destination apirport", destinationAirport.substring(0, 3));
+                hashMap.put("destination airport id", destinationAirport.substring(9));
+                hashMap.put("source airport", sourceAirport.substring(0, 3));
+                hashMap.put("source airport id", sourceAirport.substring(9));
+
+                //실시간 데이터베이스에 저장
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference reference = database.getReference("Flight");
+                FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        count = dataSnapshot.child("Flight").getChildrenCount();
+                        count++;
+                        reference.child(Long.toString(count)).setValue(hashMap);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) { }
+                });
+
+                startActivity(new Intent(FlightActivity.this, FlightMainActivity.class));
+                finish();
+            }
+        });
     }
 
     public void showDatePicker(View view) {
@@ -78,11 +166,28 @@ public class FlightActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(),"datePicker");
     }
 
-    public void processDatePickerResult(int year, int month, int day){
+    public void processDatePickerResult(int year, int month, int day) {
         String month_string = Integer.toString(month+1);
+        if (month_string.length() == 1) {
+            month_string = "0" + month_string;
+        }
         String day_string = Integer.toString(day);
+        if (day_string.length() == 1) {
+            day_string = "0" + day_string;
+        }
         String year_string = Integer.toString(year);
-        String dateMessage = (year_string + "." + month_string + "." + day_string);
-        date.setText(dateMessage);
+        dateMessage = (year_string + month_string + day_string);
+        date.setText(year_string + "." + month_string + "." + day_string);
+    }
+
+    public boolean onSupportNavigateUp() {
+        onBackPressed();; // 뒤로가기 버튼이 눌렸을시
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
+        return super.onSupportNavigateUp(); // 뒤로가기 버튼
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
     }
 }

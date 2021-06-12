@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 // 이메일 set
                 TextView userEmail = findViewById(R.id.userEmail);
                 userEmail.setText(currentUser.getEmail());
+
                 drawerLayout.openDrawer(drawerView);
 
                 return true;

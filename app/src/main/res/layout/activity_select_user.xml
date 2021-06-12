@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectUserActivity"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/customer"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:background="#03A9F4"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_customer"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:text="일반고객\n가입하기"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:background="@drawable/button_white_border"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/flight"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:background="#39B0E8"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_flight"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:text="항공사\n가입하기"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:background="@drawable/button_white_border"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</LinearLayout>
