@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 dm=resultIntent.getIntExtra("dm",0);
                 dd=resultIntent.getIntExtra("dd",0);
                 odate=(String)(dy +String.format("%02d",dm)+String.format("%02d",dd));
-                Log.w("cd", String.valueOf(dd));
+                Log.w("cd", String.valueOf(odate));
                 Log.w("cd", start);
                 Log.w("cd", destination);
             }
@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                         String str3 = (String) message.child("source airport").getValue();
                         if(odate.equals("00000"))
                         {
+                            Log.w("cd", str1+" "+odate);
                             if (str2.equals(destination)) {
                                 if (str3.equals(start)) {
                                     aplist1.add(str);
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                        else if(str1.equals(odate))
+                        else if(odate.equals(str1))
                         {
                             Log.w("cd", str1+" "+odate);
                             if (str2.equals(destination)) {
