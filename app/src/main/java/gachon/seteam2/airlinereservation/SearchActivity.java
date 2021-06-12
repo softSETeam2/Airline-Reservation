@@ -36,21 +36,41 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Flight").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dtList.clear();
+                sourcelist.clear();
+                // Get Post object and use the values to update the UI
+                for (DataSnapshot message : dataSnapshot.getChildren()) {
+                    String str2 = (String) message.child("destination apirport").getValue();
+                    String str3 = (String) message.child("source airport").getValue();
+                    if(!dtList.contains(str2)) {
+                        dtList.add(str2);
+                        sourcelist.add(str3);
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("FireBaseData", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
         //oncreate()안에 각각 객체로 만들어 변수에 할당
+        Bundle bundle1 = new Bundle(1); // 파라미터는 전달할 데이터 개수
+        bundle1.putStringArrayList("list", dtList); // key , value
 
 
         fragment2 = new Fragment2();
+        fragment2.setArguments(bundle1);
 
-
-        one_way=findViewById(R.id.one_way);
-        one_way.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, fragment2).commit();
-                fg=2;
-            }
-        });
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment2).commit();
+        fg=2;
 
         save=findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +97,5 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 }
