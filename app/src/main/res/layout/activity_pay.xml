@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/seatLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/label1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#BC866B"
+            android:text="좌석등급"
+            android:textStyle="bold"
+            />
+        <RadioButton
+            android:id="@+id/seat1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="First">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/seat2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Business">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/seat3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Economy">
+        </RadioButton>
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/seatLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/label2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#BC866B"
+            android:text="좌석위치"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"/>
+        <RadioButton
+            android:id="@+id/location1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aisle Seat">
+        </RadioButton>
+        <RadioButton
+            android:id="@+id/location2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Window Seat">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/location3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emergency Exit Seat">
+        </RadioButton>
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="85dp"
+            android:src="@drawable/none" />
+
+        <TextView
+            android:id="@+id/totalpeople"
+            android:text="Number of people: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/cntpeople"
+            android:text="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/totalpeople"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            />
+        <Button
+            android:id="@+id/plusbutton"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:text="+"
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/cntpeople"
+            />
+        <Button
+            android:id="@+id/minusbutton"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:text="-"
+            android:layout_toRightOf="@+id/plusbutton"
+            />
+
+        <TextView
+            android:id="@+id/cost"
+            android:text="TOTAL:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_below="@id/cntpeople"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:id="@+id/cntcost"
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"
+            android:layout_toRightOf="@+id/cost"
+            android:layout_below="@+id/totalpeople"
+            android:gravity="center"
+            android:layout_centerVertical="true"/>
+
+        <Button
+            android:id="@+id/btnPay"
+            android:text="pay"
+            android:layout_width="153dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cost"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+</LinearLayout>
