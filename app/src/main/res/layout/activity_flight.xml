@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="3.8dp"
+                android:text="Airline / Airline ID"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/airline"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="15dp"
+                android:text=""
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000"
+                android:hint="잠시만 기다려주세요..."/>
+
+            <TextView
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="3.8dp"
+                android:layout_marginTop="10dp"
+                android:text="Date"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/date"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="40dp"
+                    android:layout_gravity="left"
+                    android:singleLine="true"
+                    android:textSize="18dp"
+                    android:hint="날짜를 선택해주세요"
+                    android:layout_marginBottom="15dp"
+                    android:enabled="false" />
+
+                <Button
+                    android:id="@+id/dateButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:text="날짜 입력"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="3.8dp"
+                android:text="Source Airport / Source Airport ID"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16dp" />
+
+            <Spinner
+                android:id="@+id/sourceAirport"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="3.8dp"
+                android:text="Destination Airport / Destination Airport ID"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16dp" />
+
+            <Spinner
+                android:id="@+id/destinationAirport"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="3.8dp"
+                    android:text="Departure Time"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="3.8dp"
+                    android:text="Arrival Time"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="30dp" >
+
+                <!-- <DatePicker
+                    android:id="@+id/dataPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"/> -->
+
+                <Spinner
+                    android:id="@+id/departureTimeHour"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="15dp" />
+
+                <Spinner
+                    android:id="@+id/departureTimeMinute"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="15dp" />
+
+                <Spinner
+                    android:id="@+id/arrivalTimeHour"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="15dp" />
+
+                <Spinner
+                    android:id="@+id/arrivalTimeMinute"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="15dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="3.8dp"
+                    android:text="좌석 등급"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="3.8dp"
+                    android:text="Seat 개수"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/colorPrimary" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary" />
+
+            </LinearLayout>
+
+
+            <TableLayout
+                android:id="@+id/seat_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:stretchColumns="0, 1">
+
+                <TableRow>
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:id="@+id/signup04_SU"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="First"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/first"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:hint="First Class 좌석"
+                        android:textSize="15dp"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:id="@+id/signup04_IC"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Business"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/business"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:hint="Business 좌석"
+                        android:textSize="15dp"/>
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:id="@+id/signup04_SJ"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Economy"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/economy"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:hint="Economy 좌석"
+                        android:textSize="15dp"/>
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="360dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/setting_save_button"
+                android:layout_width="360dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:text="데이터 저장"
+                android:backgroundTint="@color/colorPrimary"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

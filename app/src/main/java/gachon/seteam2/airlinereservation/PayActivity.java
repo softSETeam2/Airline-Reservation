@@ -26,6 +26,7 @@ public class PayActivity extends AppCompatActivity {
 
     TextView cost;
     RadioButton seat1,seat2,seat3,location1,location2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +127,5 @@ public class PayActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }

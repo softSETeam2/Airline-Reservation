@@ -79,13 +79,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="250dp"
             android:layout_height="200dp"
             android:layout_marginLeft="85dp"
-            android:src="@drawable/none"
-            />
+            android:src="@drawable/none" />
+
         <TextView
             android:id="@+id/totalpeople"
             android:text="Number of people: "
