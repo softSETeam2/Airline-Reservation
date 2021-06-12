@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private View drawerView;
-
+    //예약하러가기 버튼
+    Button reservebtn;
     private long backBtnTime = 0;
     int dy=0, dm=0, dd=0;
     int ay=0, am=0, ad=0;
@@ -96,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+        reservebtn=findViewById(R.id.reservebtn);
+        reservebtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent2=new Intent(getApplicationContext(),ReserveActivity.class);
+                startActivityForResult(intent2,2);
+            }
+        });
 
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
@@ -111,59 +120,60 @@ public class MainActivity extends AppCompatActivity {
                 dm=resultIntent.getIntExtra("dm",0);
                 dd=resultIntent.getIntExtra("dd",0);
                 odate=(String)(dy +String.format("%02d",dm)+String.format("%02d",dd));
-                Log.w("cd", String.valueOf(dd));
+                Log.w("cd", String.valueOf(odate));
                 Log.w("cd", start);
                 Log.w("cd", destination);
             }
         }
-            mDatabase.child("Flight").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Flight").addValueEventListener(new ValueEventListener() {
 
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    datelist.clear();
-                    dtList.clear();
-                    sourcelist.clear();
-                    aplist1.clear();
-                    // Get Post object and use the values to update the UI
-                    for (DataSnapshot message : dataSnapshot.getChildren()) {
-                        String str = (String) message.child("airline").getValue();
-                        String str1 = (String) message.child("Departure Date").getValue();
-                        String str2 = (String) message.child("destination apirport").getValue();
-                        String str3 = (String) message.child("source airport").getValue();
-                        if(odate.equals("00000"))
-                        {
-                            if (str2.equals(destination)) {
-                                if (str3.equals(start)) {
-                                    aplist1.add(str);
-                                    datelist.add(str1);
-                                    dtList.add(str2);
-                                    sourcelist.add(str3);
-                                }
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                datelist.clear();
+                dtList.clear();
+                sourcelist.clear();
+                aplist1.clear();
+                // Get Post object and use the values to update the UI
+                for (DataSnapshot message : dataSnapshot.getChildren()) {
+                    String str = (String) message.child("airline").getValue();
+                    String str1 = (String) message.child("Departure Date").getValue();
+                    String str2 = (String) message.child("destination apirport").getValue();
+                    String str3 = (String) message.child("source airport").getValue();
+                    if(odate.equals("00000"))
+                    {
+                        Log.w("cd", str1+" "+odate);
+                        if (str2.equals(destination)) {
+                            if (str3.equals(start)) {
+                                aplist1.add(str);
+                                datelist.add(str1);
+                                dtList.add(str2);
+                                sourcelist.add(str3);
                             }
                         }
-                        else if(str1.equals(odate))
-                        {
-                            Log.w("cd", str1+" "+odate);
-                            if (str2.equals(destination)) {
-                                if (str3.equals(start)) {
-                                    aplist1.add(str);
-                                    datelist.add(str1);
-                                    dtList.add(str2);
-                                    sourcelist.add(str3);
-                                }
-                            }
-                        }
-
                     }
-                    getData();
-                }
+                    else if(odate.equals(str1))
+                    {
+                        Log.w("cd", str1+" "+odate);
+                        if (str2.equals(destination)) {
+                            if (str3.equals(start)) {
+                                aplist1.add(str);
+                                datelist.add(str1);
+                                dtList.add(str2);
+                                sourcelist.add(str3);
+                            }
+                        }
+                    }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Getting Post failed, log a message
-                    Log.w("FireBaseData", "loadPost:onCancelled", databaseError.toException());
                 }
-            });
+                getData();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("FireBaseData", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
     }
 
     // 액션바 등록
@@ -183,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 // 이메일 set
                 TextView userEmail = findViewById(R.id.userEmail);
                 userEmail.setText(currentUser.getEmail());
+
                 drawerLayout.openDrawer(drawerView);
 
                 return true;

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +13,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
 public class PayActivity extends AppCompatActivity {
     public static int cnt=1,costvalue=0,costvaluetemp=0,totalcost=0;
+    private FirebaseAuth firebaseAuth;
+
     TextView cost;
     RadioButton seat1,seat2,seat3,location1,location2;
     @Override
@@ -105,14 +115,15 @@ public class PayActivity extends AppCompatActivity {
                 String cnt_toString=String.valueOf(cnt);
                 String finaltotal=String.valueOf(totalcost*cnt);
 
+
                 Intent intent = new Intent(getApplicationContext(), CheckActivity.class);
                 intent.putExtra("Seat", level);
                 intent.putExtra("Location", level2);
                 intent.putExtra("Number", cnt_toString);
                 intent.putExtra("Total", finaltotal);
+
                 setResult(Activity.RESULT_OK, intent);
                 startActivity(intent);
-
             }
         });
 

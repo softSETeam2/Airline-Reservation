@@ -15,17 +15,49 @@
         android:layout_height="match_parent"
         android:padding="10dp">
         <TextView
+            android:id="@+id/title5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Arrivals :"/>
+        <TextView
+            android:id="@+id/txt5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_toRightOf="@id/title5"
+            android:hint="Source"/>
+        <TextView
+            android:id="@+id/title6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/title5"
+            android:text="Departures::"/>
+        <TextView
+            android:id="@+id/txt6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_toRightOf="@id/title6"
+            android:layout_below="@+id/txt5"
+            android:hint="Destination"/>
+        <TextView
             android:id="@+id/title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:layout_below="@+id/title6"
             android:text="Seat Grade:"/>
         <TextView
             android:id="@+id/txt1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:layout_below="@+id/title6"
             android:layout_toRightOf="@+id/title1"
             android:hint="Seat Grade"/>
 
@@ -79,5 +111,13 @@
             android:layout_toRightOf="@id/title4"
             android:layout_below="@+id/txt3"
             android:hint="Total"/>
+        <Button
+            android:id="@+id/deletebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Delete Reservation"
+            />
     </RelativeLayout>
 </LinearLayout>
