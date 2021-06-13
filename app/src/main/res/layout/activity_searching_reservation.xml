@@ -34,7 +34,8 @@
                 android:textSize="20dp"
                 android:gravity="center"
                 android:layout_gravity="center_vertical"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:hint="잠시만 기다려주세요..." />
 
             <TextView
                 android:layout_width="360dp"
@@ -59,7 +60,8 @@
                     android:singleLine="true"
                     android:textSize="18dp"
                     android:layout_marginBottom="15dp"
-                    android:enabled="false" />
+                    android:enabled="false"
+                    android:hint="날짜를 선택해주세요"/>
 
                 <Button
                     android:id="@+id/dateButton"

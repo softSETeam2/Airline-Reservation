@@ -1,5 +1,6 @@
 package gachon.seteam2.airlinereservation;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -31,6 +32,22 @@ public class PayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
+
+        Intent get = getIntent();
+        String airline = get.getExtras().getString("airline");
+        String source = get.getExtras().getString("source");
+        String destination = get.getExtras().getString("destination");
+        String date = get.getExtras().getString("date");
+        String arrivalTime = get.getExtras().getString("arrivalTime");
+        String departureTime = get.getExtras().getString("departureTime");
+
+        //액션 바 등록하기
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("좌석 선택");
+
+        actionBar.setDisplayHomeAsUpEnabled(true); //뒤로가기버튼
+        actionBar.setDisplayShowHomeEnabled(true); //홈 아이콘
+        
         TextView cntcost=(TextView)findViewById(R.id.cntcost);
         //RadioGroup-좌석등급
         RadioGroup seatLevel=(RadioGroup)findViewById((R.id.seatLevel));
@@ -55,7 +72,6 @@ public class PayActivity extends AppCompatActivity {
                 }
                 totalcost=costvalue+costvaluetemp;
                 cntcost.setText(""+totalcost);
-
             }
         });
 
@@ -118,6 +134,12 @@ public class PayActivity extends AppCompatActivity {
 
 
                 Intent intent = new Intent(getApplicationContext(), CheckActivity.class);
+                intent.putExtra("airline", airline);
+                intent.putExtra("source", source);
+                intent.putExtra("destination", destination);
+                intent.putExtra("date", date);
+                intent.putExtra("arrivalTime", arrivalTime);
+                intent.putExtra("departureTime", departureTime);
                 intent.putExtra("Seat", level);
                 intent.putExtra("Location", level2);
                 intent.putExtra("Number", cnt_toString);
@@ -125,7 +147,19 @@ public class PayActivity extends AppCompatActivity {
 
                 setResult(Activity.RESULT_OK, intent);
                 startActivity(intent);
+                finish();
             }
         });
+    }
+
+    public boolean onSupportNavigateUp() {
+        onBackPressed();; // 뒤로가기 버튼이 눌렸을시
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
+        return super.onSupportNavigateUp(); // 뒤로가기 버튼
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
     }
 }

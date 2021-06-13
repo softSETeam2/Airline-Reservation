@@ -105,6 +105,30 @@
                     android:textColor="#FF0000FF"
                     android:textSize="16sp" />
 
+                <TextView
+                    android:id="@+id/departureTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="출발시간"
+                    android:textColor="#FF0000FF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="~"
+                    android:layout_marginHorizontal="20dp"
+                    android:textColor="#FF0000FF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/arrivalTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="도착시간"
+                    android:textColor="#FF0000FF"
+                    android:textSize="16sp" />
+
 
             </LinearLayout>
 

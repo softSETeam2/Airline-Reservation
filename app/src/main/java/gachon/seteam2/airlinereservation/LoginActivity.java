@@ -100,6 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                     firebaseAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            Toast.makeText(getApplicationContext(), "잠시만 기다려주세요....", Toast.LENGTH_LONG).show();
+
                             if (task.isSuccessful()) { // 로그인 성공
                                 if (mLoginFlight.isChecked()) {
                                     FirebaseUser user = firebaseAuth.getCurrentUser();

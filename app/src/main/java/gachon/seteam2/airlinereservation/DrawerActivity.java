@@ -19,7 +19,6 @@ public class DrawerActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true); //홈 아이콘
     }
 
-
     public boolean onSupportNavigateUp() {
         onBackPressed();
         ; // 뒤로가기 버튼이 눌렸을시

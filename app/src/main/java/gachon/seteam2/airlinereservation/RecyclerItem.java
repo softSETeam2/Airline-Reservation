@@ -5,6 +5,8 @@ public class RecyclerItem {
     private String odate;
     private String destination;
     private String source;
+    private String arrivalTime;
+    private String departureTime;
 
     public void setairplane(String airplane1)
     {
@@ -22,6 +24,8 @@ public class RecyclerItem {
     {
         source = source1;
     }
+    public void setarrivalTime(String arrivalTime1) { arrivalTime = arrivalTime1; }
+    public void setdepartureTime(String departureTime1) { departureTime = departureTime1; }
     public String getodate()
     {
         return odate;
@@ -38,4 +42,6 @@ public class RecyclerItem {
     {
         return airplane;
     }
+    public String getarrivalTime() { return arrivalTime; }
+    public String getdepartureTime() { return departureTime; }
 }

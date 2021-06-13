@@ -1,5 +1,6 @@
 package gachon.seteam2.airlinereservation;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -28,6 +29,13 @@ public class ReserveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve);
+
+        //액션 바 등록하기
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("예약 정보 확인");
+        actionBar.setDisplayHomeAsUpEnabled(true); //뒤로가기버튼
+        actionBar.setDisplayShowHomeEnabled(true); //홈 아이콘
+
         SharedPreferences pref=getSharedPreferences("pref",MODE_PRIVATE);
         SharedPreferences.Editor editor=pref.edit();
         spinner1=(Spinner) findViewById(R.id.spinner1);
@@ -74,12 +82,22 @@ public class ReserveActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
-                Intent intent=new Intent(ReserveActivity.this,PayActivity.class);
-                //finish();
+                Intent intent=new Intent(ReserveActivity.this, PayActivity.class); //(getApplicationContext(),NewActivity.class);
+                finish();
                 startActivity(intent);
             }
         });
+    }
+
+    public boolean onSupportNavigateUp() {
+        onBackPressed();; // 뒤로가기 버튼이 눌렸을시
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
+        return super.onSupportNavigateUp(); // 뒤로가기 버튼
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
     }
 }
 

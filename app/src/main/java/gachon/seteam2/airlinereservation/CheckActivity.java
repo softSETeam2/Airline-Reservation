@@ -1,6 +1,7 @@
 package gachon.seteam2.airlinereservation;
 //무엇을 선택했는지 보여주는 액티비티
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -29,22 +30,22 @@ import java.util.HashMap;
 public class CheckActivity extends AppCompatActivity {
     private long count;
     private FirebaseAuth firebaseAuth2;
-    int id=0;
+    int id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
+
         Intent intent=getIntent();
-        firebaseAuth2 =  FirebaseAuth.getInstance();
+        firebaseAuth2 = FirebaseAuth.getInstance();
 
-
-        TextView txt1=(TextView) findViewById(R.id.txt1);
-        String seat=intent.getStringExtra("Seat");
+        TextView txt1 = (TextView)findViewById(R.id.txt1);
+        String seat = intent.getStringExtra("Seat");
         txt1.setText(seat);
 
         TextView txt2=(TextView) findViewById(R.id.txt2);
-        String location=intent.getStringExtra("Location");
+        String location = intent.getStringExtra("Location");
         txt2.setText(location);
 
         TextView txt3=(TextView) findViewById(R.id.txt3);
@@ -66,25 +67,43 @@ public class CheckActivity extends AppCompatActivity {
         TextView txt6=(TextView) findViewById(R.id.txt6);
         txt6.setText(destination);
 
+        TextView txt7 = findViewById(R.id.txt7);
+        String airline=intent.getStringExtra("airline");
+        txt7.setText(airline);
+
+        TextView txt8 = findViewById(R.id.txt8);
+        String date=intent.getStringExtra("date");
+        txt8.setText(date);
+
+        TextView txt9 = findViewById(R.id.txt9);
+        String departureTime=intent.getStringExtra("departureTime");
+        txt9.setText(departureTime);
+
+        TextView txt10 = findViewById(R.id.txt10);
+        String arrivalTime=intent.getStringExtra("arrivalTime");
+        txt10.setText(arrivalTime);
+
         FirebaseUser user = firebaseAuth2.getCurrentUser();
         String uid = user.getUid();
 
-
-                    //해쉬맵 테이블을 파이어베이스 데이터베이스에 저장
+        //해쉬맵 테이블을 파이어베이스 데이터베이스에 저장
         HashMap<Object,String> hashMap = new HashMap<>();
-                    //해쉬맵에 저장
+        //해쉬맵에 저장
         hashMap.put("id",uid);
+        hashMap.put("airline", airline);
+        hashMap.put("date", date);
         hashMap.put("Source",source);
         hashMap.put("Destination",destination);
+        hashMap.put("departure time", departureTime);
+        hashMap.put("arrival time", arrivalTime);
         hashMap.put("seat",seat);
         hashMap.put("location",location);
         hashMap.put("number",number);
         hashMap.put("total",total);
-                    //실시간 데이터베이스에 저장
+        //실시간 데이터베이스에 저장
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Reserve_List");
         reference.child(uid).setValue(hashMap);
-
 
         Toast.makeText(CheckActivity.this, "DB전송 성공.", Toast.LENGTH_SHORT).show();
 
@@ -94,9 +113,16 @@ public class CheckActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 reference.child(uid).removeValue();
-
             }
         });
 
+        Button homebtn = findViewById(R.id.homebtn);
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CheckActivity.this, MainActivity.class));
+                finish();
             }
+        });
     }
+}

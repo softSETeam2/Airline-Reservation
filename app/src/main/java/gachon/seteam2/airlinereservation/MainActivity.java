@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     private List<String> datelist = new ArrayList<String>();  //출발날짜
     private List<String> dtList = new ArrayList<String>();  //도착지
     private List<String> sourcelist = new ArrayList<String>();  //출발지
+    private List<String> departureTimeList = new ArrayList<>();
+    private List<String> arrivalTimeList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,8 +92,6 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-
-
         searchBtn=findViewById(R.id.searchBtn);
         searchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -98,15 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                 startActivityForResult(intent, 1);
             }
-        });
-
-        reserveBtn=findViewById(R.id.reserveBtn);
-        reserveBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent reintent = new Intent(getApplicationContext(), ReserveActivity.class);
-                Toast.makeText(MainActivity.this, "reIntent 연결실패", Toast.LENGTH_SHORT).show();
-                startActivityForResult(reintent, 3);                           }
         });
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
@@ -127,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.w("cd", destination);
             }
         }
+
         mDatabase.child("Flight").addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -135,12 +128,18 @@ public class MainActivity extends AppCompatActivity {
                 dtList.clear();
                 sourcelist.clear();
                 aplist1.clear();
+                departureTimeList.clear();
+                arrivalTimeList.clear();
+
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot message : dataSnapshot.getChildren()) {
                     String str = (String) message.child("airline").getValue();
                     String str1 = (String) message.child("Departure Date").getValue();
                     String str2 = (String) message.child("destination apirport").getValue();
                     String str3 = (String) message.child("source airport").getValue();
+                    String str4 = String.valueOf(message.child("Departure Time").getValue());
+                    String str5 = String.valueOf(message.child("Arrival Time").getValue());
+
                     if(odate.equals("00000"))
                     {
                         Log.w("cd", str1+" "+odate);
@@ -150,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
                                 datelist.add(str1);
                                 dtList.add(str2);
                                 sourcelist.add(str3);
+                                departureTimeList.add(str4);
+                                arrivalTimeList.add(str5);
                             }
                         }
                     }
@@ -162,10 +163,11 @@ public class MainActivity extends AppCompatActivity {
                                 datelist.add(str1);
                                 dtList.add(str2);
                                 sourcelist.add(str3);
+                                departureTimeList.add(str4);
+                                arrivalTimeList.add(str5);
                             }
                         }
                     }
-
                 }
                 getData();
             }
@@ -228,9 +230,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-                case R.id.testitem: // 아이템1: 테스트 빈공간
-                    Toast.makeText(getApplicationContext(), "SelectedItem 1", Toast.LENGTH_SHORT).show();
-                    break;
                 case R.id.setting: // 아이템2: 설정화면으로 이동
                     Intent settingIntent = new Intent(getApplicationContext(), DrawerActivity.class);
                     startActivity(settingIntent);
@@ -291,6 +290,16 @@ public class MainActivity extends AppCompatActivity {
             data.setodate(datelist.get(i));
             data.setdestination(dtList.get(i));
             data.setsource(sourcelist.get(i));
+
+            if (departureTimeList.get(i).length() == 3)
+                data.setdepartureTime("0" + departureTimeList.get(i));
+            else
+                data.setdepartureTime(departureTimeList.get(i));
+
+            if (arrivalTimeList.get(i).length() == 3)
+                data.setarrivalTime("0" + arrivalTimeList.get(i));
+            else
+                data.setarrivalTime(arrivalTimeList.get(i));
 
             adapter.addItem(data);
         }
