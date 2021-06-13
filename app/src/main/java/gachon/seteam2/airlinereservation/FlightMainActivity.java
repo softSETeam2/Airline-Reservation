@@ -35,14 +35,6 @@ public class FlightMainActivity extends AppCompatActivity {
             }
         });
 
-        reservationData = findViewById(R.id.reservationData);
-        reservationData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FlightMainActivity.this, SearchingReservationActivity.class));
-            }
-        });
-
         logout = findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

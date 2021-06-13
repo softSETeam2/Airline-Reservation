@@ -18,26 +18,14 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/flightData"
         android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:drawableLeft="@drawable/plane"
         android:text="항공데이터 입력하기"
         android:paddingLeft="18dp"
-        android:textSize="20dp"
+        android:textSize="22dp"
         android:textColor="@color/white"
         android:background="@drawable/button_white_border2"
         android:layout_marginBottom="30dp" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/reservationData"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:drawableLeft="@drawable/searching"
-        android:text="예약데이터 검색하기"
-        android:paddingLeft="18dp"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/button_white_border2" />
 
     <Button
         android:id="@+id/logout"
