@@ -75,7 +75,7 @@ public class ReserveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
-                Intent intent=new Intent(ReserveActivity.this,PayActivity.class); //(getApplicationContext(),NewActivity.class);
+                Intent intent=new Intent(ReserveActivity.this,PayActivity.class);
                 //finish();
                 startActivity(intent);
             }

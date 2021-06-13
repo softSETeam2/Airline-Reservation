@@ -25,7 +25,15 @@
                 android:text="항공편 검색"
                 android:layout_gravity="right" />
 
-            <androidx.recyclerview.widget.RecyclerView
+
+            <Button
+                android:id="@+id/reserveBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="예약하기"
+                android:layout_gravity="right"/>
+
+                <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="613dp"

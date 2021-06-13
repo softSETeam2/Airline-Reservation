@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private View drawerView;
     //예약하러가기 버튼
-    Button reservebtn;
+    Button reserveBtn;
     private long backBtnTime = 0;
     int dy=0, dm=0, dd=0;
     int ay=0, am=0, ad=0;
@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
+
+
         searchBtn=findViewById(R.id.searchBtn);
         searchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -97,15 +99,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
-        reservebtn=findViewById(R.id.reservebtn);
-        reservebtn.setOnClickListener(new View.OnClickListener(){
+
+        reserveBtn=findViewById(R.id.reserveBtn);
+        reserveBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent2=new Intent(getApplicationContext(),ReserveActivity.class);
-                startActivityForResult(intent2,2);
-            }
+                Intent reintent = new Intent(getApplicationContext(), ReserveActivity.class);
+                Toast.makeText(MainActivity.this, "reIntent 연결실패", Toast.LENGTH_SHORT).show();
+                startActivityForResult(reintent, 3);                           }
         });
-
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
