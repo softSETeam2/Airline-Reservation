@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent reintent = new Intent(getApplicationContext(), ReserveActivity.class);
-                Toast.makeText(MainActivity.this, "reIntent 연결실패", Toast.LENGTH_SHORT).show();
                 startActivityForResult(reintent, 3);                           }
         });
     }
