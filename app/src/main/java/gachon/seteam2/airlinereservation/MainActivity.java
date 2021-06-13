@@ -230,12 +230,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-                case R.id.setting: // 아이템2: 설정화면으로 이동
-                    Intent settingIntent = new Intent(getApplicationContext(), DrawerActivity.class);
-                    startActivity(settingIntent);
-                    overridePendingTransition(R.anim.slide_enter, R.anim.none);
-                    break;
-                case R.id.logout: //아이템3: 로그아웃 버튼
+                case R.id.logout: // 로그아웃 버튼
                     new AlertDialog.Builder(mContext) // 확인창 표시
                             .setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?")
                             .setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {

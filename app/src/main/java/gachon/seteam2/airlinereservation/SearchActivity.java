@@ -1,6 +1,7 @@
 package gachon.seteam2.airlinereservation;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -36,6 +37,14 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        //액션 바 등록하기
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("항공편 검색");
+
+        actionBar.setDisplayHomeAsUpEnabled(true); //뒤로가기버튼
+        actionBar.setDisplayShowHomeEnabled(true); //홈 아이콘
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Flight").addValueEventListener(new ValueEventListener() {
 
@@ -97,5 +106,16 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public boolean onSupportNavigateUp() {
+        onBackPressed();; // 뒤로가기 버튼이 눌렸을시
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
+        return super.onSupportNavigateUp(); // 뒤로가기 버튼
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.none, R.anim.slide_exit);
     }
 }
